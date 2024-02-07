@@ -16,8 +16,8 @@ let intervalID;
 let ballSpeed = 1;
 let ballX = gameWidth / 2;
 let ballY = gameHeight / 2;
-let ballXDirextion = 0;
-let ballYDirextion = 0;
+let ballXDirection = 0;
+let ballYDirection = 0;
 let player1Score = 0;
 let player2Score = 0;
 let paddle1 = {
@@ -67,9 +67,26 @@ function drawPaddles() {
   ctx.strokeRect(paddle2.x, paddle2.y, paddle2.width, paddle2.height);
 }
 function createBall() {
- 
+  ballSpeed = 1;
+  if (Math.round(Math.random()) == 1) {
+    ballXDirection = 1;
+  } else {
+    ballXDirection = -1;
+  }
+
+  if (Math.round(Math.random()) == 1) {
+    ballYDirection = 1;
+  } else {
+    ballYDirection = -1;
+  }
+  ballX = gameWidth / 2;
+  ballY = gameHeight / 2;
+  drawBall(ballX, ballY);
 }
-function moveBall() {}
+function moveBall() {
+  ballX += ballSpeed * ballXDirection;
+  ballY += ballSpeed * ballYDirection;
+}
 function drawBall(ballX, ballY) {
   ctx.fillStyle = ballColor;
   ctx.strokeStyle = ballBorderColor;
@@ -79,7 +96,27 @@ function drawBall(ballX, ballY) {
   ctx.stroke();
   ctx.fill();
 }
-function checkCollision() {}
+function checkCollision() {
+  if (ballY <= 0 + ballRadius) {
+    ballYDirection *= -1;
+  }
+  if (ballY >= gameHeight - ballRadius) {
+    ballYDirection *= -1;
+  }
+  if (ballX <= 0) {
+    player2Score += 1;
+    updateScore();
+    createBall();
+    return;
+  }
+
+  if (ballX >= gameWidth) {
+    player1Score += 1;
+    updateScore();
+    createBall();
+    return;
+  }
+}
 function changeDirection(event) {
   const keyPressed = event.keyCode;
   const paddle1Up = 87;
