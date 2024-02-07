@@ -9,6 +9,7 @@ const paddle1Color = "lightblue";
 const paddle2Color = "red";
 const paddleBorder = "black";
 const ballColor = "yellow";
+const ballBorderColor = "black";
 const ballRadius = 12.5;
 const paddleSpeed = 50;
 let intervalID;
@@ -33,22 +34,40 @@ let paddle2 = {
 };
 
 window.addEventListener("keydown", changeDirection);
-resetBtn.addEventListener("click", resetGame);
+// resetBtn.addEventListener("click", resetGame);
 
-gameStart();
-drawPaddles();
+gameStart()
 
-function gameStart() {}
-function nextTick() {}
-function clearBoard() {}
+function gameStart() {
+ createBall();
+ nextTick();
+}
+function nextTick() {
+ intervalID = setInterval(() => {
+  clearBoard();
+  drawPaddles();
+  moveBall();
+  drawBall(ballX, ballY);
+  checkCollision();
+  nextTick();
+ }, 10)
+}
+function clearBoard() {
+ 
+}
 function drawPaddles() {
   ctx.strokeStyle = paddleBorder;
   ctx.fillStyle = paddle1Color;
   ctx.fillRect(paddle1.x, paddle1.y, paddle1.width, paddle1.height);
+  ctx.strokeRect(paddle1.x, paddle1.y, paddle1.width, paddle1.height);
+
+  ctx.fillStyle = paddle2Color;
+  ctx.fillRect(paddle2.x, paddle2.y, paddle2.width, paddle2.height);
+  ctx.strokeRect(paddle2.x, paddle2.y, paddle2.width, paddle2.height);
 }
 function createBall() {}
 function moveBall() {}
-function drawBall() {}
+function drawBall(ballX, ballY) {}
 function checkCollision() {}
 function changeDirection() {}
 function updateScore() {}
