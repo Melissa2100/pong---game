@@ -1,7 +1,7 @@
 const gameBoard = document.querySelector("#gameBoard");
 const ctx = gameBoard.getContext("2d");
 const scoreText = document.querySelector("#scoreText");
-const resetBtn = document.querySelector("#reset");
+const resetBtn = document.querySelector("#resetBtn");
 const gameWidth = gameBoard.width;
 const gameHeight = gameBoard.height;
 const boardBackground = "forestgreen";
@@ -34,7 +34,7 @@ let paddle2 = {
 };
 
 window.addEventListener("keydown", changeDirection);
-// resetBtn.addEventListener("click", resetGame);
+resetBtn.addEventListener("click", resetGame);
 
 gameStart();
 
@@ -111,7 +111,7 @@ function checkCollision() {
   }
   if (ballX <= paddle1.x + paddle1.width + ballRadius) {
     if (ballY > paddle1.y && ballY < paddle1.y + paddle1.height) {
-      ballX = (paddle1.x + paddle1.width) + ballRadius; //if ball gets stuck
+      ballX = paddle1.x + paddle1.width + ballRadius; //if ball gets stuck
       ballXDirection *= -1;
       ballSpeed += 1;
     }
@@ -119,6 +119,7 @@ function checkCollision() {
 
   if (ballX >= paddle2.x - ballRadius) {
     if (ballY > paddle2.y && ballY < paddle2.y + paddle2.height) {
+      ballX = paddle2.x - ballRadius; //if ball gets stuck
       ballXDirection *= -1;
       ballSpeed += 1;
     }
@@ -164,5 +165,30 @@ function changeDirection(event) {
       break;
   }
 }
-function updateScore() {}
-function resetGame() {}
+function updateScore() {
+  scoreText.textContent = `${player1Score} : ${player2Score}`;
+}
+function resetGame() {
+  player1Score = 0;
+  player2Score = 0;
+  paddle1 = {
+    width: 25,
+    height: 100,
+    x: 0,
+    y: 0,
+  };
+  paddle2 = {
+    width: 25,
+    height: 100,
+    x: gameWidth - 25,
+    y: gameHeight - 100,
+  };
+  ballSpeed = 1;
+  ballX = 0;
+  ballY = 0;
+  ballXDirection = 0;
+  ballYDirection = 0;
+  updateScore();
+  clearInterval(intervalID);
+  gameStart();
+}
