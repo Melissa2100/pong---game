@@ -19,3 +19,4 @@ let ballXDirextion = 0;
 let ballYDirextion = 0;
 let palyer1Score = 0;
 let palyer2Score = 0;
+y
