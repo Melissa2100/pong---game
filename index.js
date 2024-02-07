@@ -36,25 +36,25 @@ let paddle2 = {
 window.addEventListener("keydown", changeDirection);
 // resetBtn.addEventListener("click", resetGame);
 
-gameStart()
+gameStart();
 
 function gameStart() {
- createBall();
- nextTick();
+  createBall();
+  nextTick();
 }
 function nextTick() {
- intervalID = setInterval(() => {
-  clearBoard();
-  drawPaddles();
-  moveBall();
-  drawBall(ballX, ballY);
-  checkCollision();
-  nextTick();
- }, 10)
+  intervalID = setInterval(() => {
+    clearBoard();
+    drawPaddles();
+    moveBall();
+    drawBall(ballX, ballY);
+    checkCollision();
+    nextTick();
+  }, 10);
 }
 function clearBoard() {
- ctx.fillStyle = boardBackground;
- ctx.fillRect(0, 0, gameWidth, gameHeight);
+  ctx.fillStyle = boardBackground;
+  ctx.fillRect(0, 0, gameWidth, gameHeight);
 }
 function drawPaddles() {
   ctx.strokeStyle = paddleBorder;
@@ -70,6 +70,18 @@ function createBall() {}
 function moveBall() {}
 function drawBall(ballX, ballY) {}
 function checkCollision() {}
-function changeDirection() {}
+function changeDirection(event) {
+  const keyPressed = event.keyCode;
+  const paddle1Up = 87;
+  const paddle1Down = 83;
+  const paddle2Up = 38;
+  const paddle2Down = 40;
+
+  switch (keyPressed) {
+    case paddle1Up:
+      paddle1.y -= paddleSpeed;
+      break;
+  }
+}
 function updateScore() {}
 function resetGame() {}
