@@ -79,7 +79,27 @@ function changeDirection(event) {
 
   switch (keyPressed) {
     case paddle1Up:
-      paddle1.y -= paddleSpeed;
+      if (paddle1.y > 0) {
+        paddle1.y -= paddleSpeed;
+      }
+      break;
+
+    case paddle1Down:
+      if (paddle1.y < gameHeight - paddle1.height) {
+        paddle1.y += paddleSpeed;
+      }
+      break;
+
+    case paddle2Up:
+      if (paddle2.x > 0) {
+        paddle1.y -= paddleSpeed;
+      }
+      break;
+
+    case paddle2Down:
+      if (paddle2.y < gameHeight - paddle2.height) {
+        paddle1.y += paddleSpeed;
+      }
       break;
   }
 }
