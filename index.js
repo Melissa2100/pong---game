@@ -66,9 +66,19 @@ function drawPaddles() {
   ctx.fillRect(paddle2.x, paddle2.y, paddle2.width, paddle2.height);
   ctx.strokeRect(paddle2.x, paddle2.y, paddle2.width, paddle2.height);
 }
-function createBall() {}
+function createBall() {
+ 
+}
 function moveBall() {}
-function drawBall(ballX, ballY) {}
+function drawBall(ballX, ballY) {
+  ctx.fillStyle = ballColor;
+  ctx.strokeStyle = ballBorderColor;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(ballX, ballY, ballRadius, 0, 2 * Math.PI);
+  ctx.stroke();
+  ctx.fill();
+}
 function checkCollision() {}
 function changeDirection(event) {
   const keyPressed = event.keyCode;
