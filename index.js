@@ -36,19 +36,20 @@ window.addEventListener("keydown", changeDirection);
 resetBtn.addEventListener("click", resetGame);
 
 gameStart();
+drawPaddles();
 
-function gameStart() {};
-function nextTick() {};
-function clearBoard() {};
+function gameStart() {}
+function nextTick() {}
+function clearBoard() {}
 function drawPaddles() {
- ctx.strokeStyle = 
-};
-function createBall() {};
-function moveBall() {};
-function drawBall() {};
-function checkCollision() {};
-function changeDirection() {};
-function updateScore() {};
-function resetGame() {};
-
-
+  ctx.strokeStyle = paddleBorder;
+  ctx.fillStyle = paddle1Color;
+  ctx.fillRect(paddle1.x, paddle1.y, paddle1.width, paddle1.height);
+}
+function createBall() {}
+function moveBall() {}
+function drawBall() {}
+function checkCollision() {}
+function changeDirection() {}
+function updateScore() {}
+function resetGame() {}
